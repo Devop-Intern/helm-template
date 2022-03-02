@@ -45,4 +45,3 @@ spec:
     - port: {{ .Values.pgadmin.servicePort }}
   selector:
     app: {{ .Values.pgadmin.name }}
-

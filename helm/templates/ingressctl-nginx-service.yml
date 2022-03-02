@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ .Values.nginx.name }}
+  namespace: {{ .Values.nginx.namespace1 }}
+spec:
+  project: {{ .Values.nginx.project }}
+  source:
+    chart: {{ .Values.nginx.chart }}
+    repoURL: {{ .Values.nginx.repo }}
+    targetRevision: {{ .Values.nginx.targetrevision }}
+    helm:
+      values: |-
+        controller:
+          service:
+            create: false
+  destination:
+    server: {{ .Values.nginx.server }}
+    namespace: {{ .Values.nginx.namespace2 }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
