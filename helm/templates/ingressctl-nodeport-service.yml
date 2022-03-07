@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.nodeport.name }}
+  namespace: {{ .Values.nodeport.namespace }}
+spec:
+  type: {{ .Values.nodeport.type }}
+  ports:
+  - port: {{ .Values.nodeport.port1 }}
+    targetPort: {{ .Values.nodeport.tg1 }}
+    protocol: {{ .Values.nodeport.protocol }}
+    name: {{ .Values.nodeport.http }}
+    nodePort: {{ .Values.nodeport.nodeport }}
+  - port: {{ .Values.nodeport.port2 }}
+    targetPort: {{ .Values.nodeport.tg2 }}
+    protocol: {{ .Values.nodeport.protocol }}
+    name: {{ .Values.nodeport.https }}
+  selector:
+    app: {{ .Values.nodeport.app }}
