@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: {{ .Values.nginx.name }}
-  namespace: {{ .Values.nginx.namespace1 }}
+  namespace: {{ .Values.nginx.namespaceapp }}
 spec:
   project: {{ .Values.nginx.project }}
   source:
@@ -16,7 +16,7 @@ spec:
             create: false
   destination:
     server: {{ .Values.nginx.server }}
-    namespace: {{ .Values.nginx.namespace2 }}
+    namespace: {{ .Values.nginx.namespacedest }}
   syncPolicy:
     automated:
       prune: true

@@ -6,13 +6,13 @@ metadata:
 spec:
   type: {{ .Values.nodeport.type }}
   ports:
-  - port: {{ .Values.nodeport.port1 }}
-    targetPort: {{ .Values.nodeport.tg1 }}
+  - port: {{ .Values.nodeport.porthttp }}
+    targetPort: {{ .Values.nodeport.tghttp }}
     protocol: {{ .Values.nodeport.protocol }}
     name: {{ .Values.nodeport.http }}
     nodePort: {{ .Values.nodeport.nodeport }}
-  - port: {{ .Values.nodeport.port2 }}
-    targetPort: {{ .Values.nodeport.tg2 }}
+  - port: {{ .Values.nodeport.porthttps }}
+    targetPort: {{ .Values.nodeport.tghttps }}
     protocol: {{ .Values.nodeport.protocol }}
     name: {{ .Values.nodeport.https }}
   selector:
