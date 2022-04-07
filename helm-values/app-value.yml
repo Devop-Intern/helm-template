@@ -1,52 +1,86 @@
-        # echoserver:
-        #   name: echoserver
-        #   image: ealen/echo-server:latest
-        #   replicas: 1
-        #   containerPort: 80
-        #   serviceType: ClusterIP
-        #   servicePort: 80
-        #   path: /echo
-        #   pathType: Exact
-        # helloworld:
-        #   name: helloworld
-        #   image: tutum/hello-world:latest
-        #   replicas: 1
-        #   containerPort: 80
-        #   serviceType: ClusterIP
-        #   servicePort: 80
-        #   path: /hello
-        #   pathType: Exact
-        # pgadmin:
-        #   name: pgadmin
-        #   image: dpage/pgadmin4
-        #   replicas: 1
-        #   containerPort: 80
-        #   serviceType: ClusterIP
-        #   servicePort: 80
-        #   path: /pgadmin
-        #   pathType: Prefix
-        #   email: punthanat.u@appman.co.th
-        #   password: admin
-        #   scriptname: /pgadmin
-        # ingress:
-        #   name: ingress-ctl
-        #   host: ${module.vpc.lb_dns_name}
-        #   annotations:
-        #     kubernetes.io/ingress.class: nginx
-        #     nginx.org/rewrites: "serviceName=pgadmin-svc rewrite=/pgadmin"
-        #     nginx.org/rewrites: "serviceName=echoserver-svc rewrite=/"
-        #     nginx.org/rewrites: "serviceName=helloworld-svc rewrite=/"
-        # nodeport:
-        #   name: nodeport
-        #   namespace: nginx-ingress
-        #   type: NodePort
-        #   app: nginx-ingress-nginx-ingress
-        # nginx:
-        #   name: nginx-ingress
-        #   namespace1: argocd
-        #   namespace2: nginx-ingress
-        #   project: default
-        #   chart: nginx-ingress
-        #   repo: https://helm.nginx.com/stable
-        #   targetrevision: 0.4.1
-        #   server: https://kubernetes.default.svc
+# echoserver:
+#   name: echoserver
+#   image: ealen/echo-server:latest
+#   replicas: 1
+#   containerPort: 80
+#   serviceType: ClusterIP
+#   servicePort: 80
+#   kong_path: /kongecho
+#   traefik_path: /traefikecho
+#   pathType: Exact
+# helloworld:
+#   name: helloworld
+#   image: tutum/hello-world:latest
+#   replicas: 1
+#   containerPort: 80
+#   serviceType: ClusterIP
+#   servicePort: 80
+#   kong_path: /konghello
+#   traefik_path: /traefikhello
+#   pathType: Exact
+# pgadmin:
+#   kong: kongpgadmin
+#   traefik: traefikpgadmin
+#   image: dpage/pgadmin4
+#   replicas: 1
+#   containerPort: 80
+#   serviceType: ClusterIP
+#   servicePort: 80
+#   kong_path: /kongpgadmin
+#   traefik_path: /traefikpgadmin
+#   pathType: Prefix
+#   email: patiphan.t@appman.co.th
+#   password: admin
+#   kongscriptname: /kongpgadmin
+#   traefikscriptname: /traefikpgadmin
+# ingress:
+#   kong_ingress: kong-ingress
+#   kong_pgadmin_ingress: kong-pgadmin-ingress
+#   traefik: traefik-ingress
+#   host: nlb-new02-d47ec6722147758b.elb.ap-southeast-1.amazonaws.com
+# kongig:
+#   name: kong-ingress-controller
+#   nodename:
+#   namespaceapp: argocd
+#   namespacedest: kong
+#   project: default
+#   chart: kong
+#   repo: https://charts.konghq.com
+#   targetrevision: 2.7.0
+#   server: https://kubernetes.default.svc
+# traefikig:
+#   name: traefik-ingress-controller
+#   nodename:
+#   namespaceapp: argocd
+#   namespacedest: traefik
+#   project: default
+#   chart: traefik
+#   repo: https://helm.traefik.io/traefik
+#   targetrevision: 10.15.0
+#   server: https://kubernetes.default.svc
+# kongnp:
+#   name: kong
+#   namespace: kong
+#   type: NodePort
+#   porthttp: 80
+#   porthttps: 443
+#   tghttp: 8000
+#   tghttps: 8443
+#   protocal: TCP
+#   nodeport: 32592
+#   http: http
+#   https: https
+#   app: kong
+# traefiknp:
+#   name: traefik
+#   namespace: traefik
+#   type: NodePort
+#   porthttp: 80
+#   porthttps: 443
+#   tghttp: 8000
+#   tghttps: 8443
+#   protocal: TCP
+#   nodeport: 32591
+#   http: http
+#   https: https
+#   app: traefik
