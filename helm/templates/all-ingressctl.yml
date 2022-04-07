@@ -21,7 +21,7 @@ spec:
                 - key: IngressLabel
                   operator: In
                   values:
-                  - new-kong
+                  - {{ .Values.kongig.nodename }}
   destination:
     server: {{ .Values.kongig.server }}
     namespace: {{ .Values.kongig.namespacedest }}
@@ -57,7 +57,7 @@ spec:
                 - key: IngressLabel
                   operator: In
                   values:
-                  - new-traefik
+                  - {{ .Values.traefikig.nodename }}
   destination:
     server: {{ .Values.traefikig.server }}
     namespace: {{ .Values.traefikig.namespacedest }}
