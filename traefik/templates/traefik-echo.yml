@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.echoserver.traefik_name }}
+  name: {{ .Values.echoserver.traefikname }}
   labels:
-    app: {{ .Values.echoserver.traefik_name }}
+    app: {{ .Values.echoserver.traefikname }}
 spec:
   replicas: {{ .Values.echoserver.replicas }}
   selector:
     matchLabels:
-      app: {{ .Values.echoserver.traefik_name }}
+      app: {{ .Values.echoserver.traefikname }}
   template:
     metadata:
       labels:
-        app: {{ .Values.echoserver.traefik_name }}
+        app: {{ .Values.echoserver.traefikname }}
     spec:
       containers:
-      - name: {{ .Values.echoserver.traefik_name }}
+      - name: {{ .Values.echoserver.traefikname }}
         image: {{ .Values.echoserver.image }}
         ports:
         - containerPort: {{ .Values.echoserver.containerPort }}
@@ -23,10 +23,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.echoserver.traefik_name }}-svc
+  name: {{ .Values.echoserver.traefikname }}-svc
 spec:
   type: {{ .Values.echoserver.serviceType }}
   ports:
   - port: {{ .Values.echoserver.servicePort }}
   selector:
-    app: {{ .Values.echoserver.traefik_name }}
+    app: {{ .Values.echoserver.traefikname }}

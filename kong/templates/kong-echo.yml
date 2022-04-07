@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.echoserver.kong_name }}
+  name: {{ .Values.echoserver.kongname }}
   labels:
-    app: {{ .Values.echoserver.kong_name }}
+    app: {{ .Values.echoserver.kongname }}
 spec:
   replicas: {{ .Values.echoserver.replicas }}
   selector:
     matchLabels:
-      app: {{ .Values.echoserver.kong_name }}
+      app: {{ .Values.echoserver.kongname }}
   template:
     metadata:
       labels:
-        app: {{ .Values.echoserver.kong_name }}
+        app: {{ .Values.echoserver.kongname }}
     spec:
       containers:
-      - name: {{ .Values.echoserver.kong_name }}
+      - name: {{ .Values.echoserver.kongname }}
         image: {{ .Values.echoserver.image }}
         ports:
         - containerPort: {{ .Values.echoserver.containerPort }}
@@ -23,10 +23,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.echoserver.kong_name }}-svc
+  name: {{ .Values.echoserver.kongname }}-svc
 spec:
   type: {{ .Values.echoserver.serviceType }}
   ports:
   - port: {{ .Values.echoserver.servicePort }}
   selector:
-    app: {{ .Values.echoserver.kong_name }}
+    app: {{ .Values.echoserver.kongname }}

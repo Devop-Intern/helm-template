@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.pgadmin.kong_name }}
+  name: {{ .Values.pgadmin.kongname }}
   labels:
-    app: {{ .Values.pgadmin.kong_name }}
+    app: {{ .Values.pgadmin.kongname }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Values.pgadmin.kong_name }}
+      app: {{ .Values.pgadmin.kongname }}
   template:
     metadata:
       labels:
-        app: {{ .Values.pgadmin.kong_name }}
+        app: {{ .Values.pgadmin.kongname }}
     spec:
       containers:
-        - name: {{ .Values.pgadmin.kong_name }}
+        - name: {{ .Values.pgadmin.kongname }}
           image: {{ .Values.pgadmin.image }}
           env:
             - name: PGADMIN_DEFAULT_PASSWORD
@@ -36,12 +36,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.pgadmin.kong_name }}-svc
+  name: {{ .Values.pgadmin.kongname }}-svc
   labels:
-    app: {{ .Values.pgadmin.kong_name }}
+    app: {{ .Values.pgadmin.kongname }}
 spec:
   type: {{ .Values.pgadmin.serviceType }}
   ports:
     - port: {{ .Values.pgadmin.servicePort }}
   selector:
-    app: {{ .Values.pgadmin.kong_name }}
+    app: {{ .Values.pgadmin.kongname }}

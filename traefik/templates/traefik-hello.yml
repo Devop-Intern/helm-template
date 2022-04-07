@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.helloserver.traefik_name }}
+  name: {{ .Values.helloserver.traefikname }}
   labels:
-    app: {{ .Values.helloserver.traefik_name }}
+    app: {{ .Values.helloserver.traefikname }}
 spec:
   replicas: {{ .Values.helloserver.replicas }}
   selector:
     matchLabels:
-      app: {{ .Values.helloserver.traefik_name }}
+      app: {{ .Values.helloserver.traefikname }}
   template:
     metadata:
       labels:
-        app: {{ .Values.helloserver.traefik_name }}
+        app: {{ .Values.helloserver.traefikname }}
     spec:
       containers:
-      - name: {{ .Values.helloserver.traefik_name }}
+      - name: {{ .Values.helloserver.traefikname }}
         image: {{ .Values.helloserver.image }}
         ports:
         - containerPort: {{ .Values.helloserver.containerPort }}
@@ -23,10 +23,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.helloserver.traefik_name }}-svc
+  name: {{ .Values.helloserver.traefikname }}-svc
 spec:
   type: {{ .Values.helloserver.serviceType }}
   ports:
   - port: {{ .Values.helloserver.servicePort }}
   selector:
-    app: {{ .Values.helloserver.traefik_name }}
+    app: {{ .Values.helloserver.traefikname }}
