@@ -12,7 +12,7 @@ spec:
             pathType: {{ .Values.echoserver.pathType }}
             backend:
               service:
-                name: {{ .Values.echoserver.name }}-svc
+                name: {{ .Values.echoserver.traefik_name }}-svc
                 port: 
                   number: {{ .Values.echoserver.servicePort }}
               
@@ -20,6 +20,6 @@ spec:
             pathType: {{ .Values.helloserver.pathType }}
             backend:
               service:
-                name: {{ .Values.helloserver.name }}-svc
+                name: {{ .Values.helloserver.traefik_name }}-svc
                 port: 
                   number: {{ .Values.helloserver.servicePort }}
