@@ -17,11 +17,11 @@ spec:
                 port: 
                   number: {{ .Values.echoserver.servicePort }}
 
-          - path: {{ .Values.helloworld.kong_path }}
-            pathType: {{ .Values.helloworld.pathType }}
+          - path: {{ .Values.hellserver.kong_path }}
+            pathType: {{ .Values.hellserver.pathType }}
             backend:
               service:
-                name: {{ .Values.helloworld.name }}-svc
+                name: {{ .Values.hellserver.name }}-svc
                 port: 
-                  number: {{ .Values.helloworld.servicePort }}
+                  number: {{ .Values.hellserver.servicePort }}
                   
