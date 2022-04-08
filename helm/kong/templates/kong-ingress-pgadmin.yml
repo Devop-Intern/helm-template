@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Values.ingress.kong_pgadmin_ingress }}
+  name: {{ .Values.ingress.pgadmin_name }}
   annotations:
     kubernetes.io/ingress.class: "kong"
 spec:
@@ -9,11 +9,11 @@ spec:
     - host: {{ .Values.ingress.host }}
       http:
         paths:
-          - path: {{ .Values.pgadmin.kong_path }}
+          - path: {{ .Values.pgadmin.path }}
             pathType: {{ .Values.pgadmin.pathType }}
             backend:
               service:
-                name: {{ .Values.pgadmin.kongname }}-svc
+                name: {{ .Values.pgadmin.name }}-svc
                 port: 
                   number: {{ .Values.pgadmin.servicePort }}
                   

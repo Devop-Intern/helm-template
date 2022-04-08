@@ -1,19 +1,19 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.kongnp.name }}
-  namespace: {{ .Values.kongnp.namespace }}
+  name: {{ .Values.nodeport.name }}
+  namespace: {{ .Values.nodeport.namespace }}
 spec:
-  type: {{ .Values.kongnp.type }}
+  type: {{ .Values.nodeport.type }}
   ports:
-  - port: {{ .Values.kongnp.porthttp }}
-    targetPort: {{ .Values.kongnp.tghttp }}
-    protocol: {{ .Values.kongnp.protocol }}
-    name: {{ .Values.kongnp.http }}
-    nodePort: {{ .Values.kongnp.nodeport }}
-  - port: {{ .Values.kongnp.porthttps }}
-    targetPort: {{ .Values.kongnp.tghttps }}
-    protocol: {{ .Values.kongnp.protocol }}
-    name: {{ .Values.kongnp.https }}
+  - port: {{ .Values.nodeport.porthttp }}
+    targetPort: {{ .Values.nodeport.tghttp }}
+    protocol: {{ .Values.nodeport.protocol }}
+    name: {{ .Values.nodeport.http }}
+    nodePort: {{ .Values.nodeport.nodeport }}
+  - port: {{ .Values.nodeport.porthttps }}
+    targetPort: {{ .Values.nodeport.tghttps }}
+    protocol: {{ .Values.nodeport.protocol }}
+    name: {{ .Values.nodeport.https }}
   selector:
-    app.kubernetes.io/name: {{ .Values.kongnp.app }}
+    app.kubernetes.io/name: {{ .Values.nodeport.app }}

@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .Values.kongig.name }}
-  namespace: {{ .Values.kongig.namespaceapp }}
+  name: {{ .Values.ingressctl.name }}
+  namespace: {{ .Values.ingressctl.namespaceapp }}
 spec:
-  project: {{ .Values.kongig.project }}
+  project: {{ .Values.ingressctl.project }}
   source:
-    chart: {{ .Values.kongig.chart }}
-    repoURL: {{ .Values.kongig.repo }}
-    targetRevision: {{ .Values.kongig.targetrevision }}
+    chart: {{ .Values.ingressctl.chart }}
+    repoURL: {{ .Values.ingressctl.repo }}
+    targetRevision: {{ .Values.ingressctl.targetrevision }}
     helm:
       values: |-
         proxy:
@@ -21,10 +21,10 @@ spec:
                 - key: IngressLabel
                   operator: In
                   values:
-                  - {{ .Values.kongig.nodename }}
+                  - {{ .Values.ingressctl.nodename }}
   destination:
-    server: {{ .Values.kongig.server }}
-    namespace: {{ .Values.kongig.namespacedest }}
+    server: {{ .Values.ingressctl.server }}
+    namespace: {{ .Values.ingressctl.namespacedest }}
   syncPolicy:
     automated:
       prune: true

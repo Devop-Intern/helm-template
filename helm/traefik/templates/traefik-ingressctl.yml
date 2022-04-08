@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: {{ .Values.traefikig.name }}
-  namespace: {{ .Values.traefikig.namespaceapp }}
+  name: {{ .Values.ingressctl.name }}
+  namespace: {{ .Values.ingressctl.namespaceapp }}
 spec:
-  project: {{ .Values.traefikig.project }}
+  project: {{ .Values.ingressctl.project }}
   source:
-    chart: {{ .Values.traefikig.chart }}
-    repoURL: {{ .Values.traefikig.repo }}
-    targetRevision: {{ .Values.traefikig.targetrevision }}
+    chart: {{ .Values.ingressctl.chart }}
+    repoURL: {{ .Values.ingressctl.repo }}
+    targetRevision: {{ .Values.ingressctl.targetrevision }}
     helm:
       values: |-
         service:
@@ -23,10 +23,10 @@ spec:
                 - key: IngressLabel
                   operator: In
                   values:
-                  - {{ .Values.traefikig.nodename }}
+                  - {{ .Values.ingressctl.nodename }}
   destination:
-    server: {{ .Values.traefikig.server }}
-    namespace: {{ .Values.traefikig.namespacedest }}
+    server: {{ .Values.ingressctl.server }}
+    namespace: {{ .Values.ingressctl.namespacedest }}
   syncPolicy:
     automated:
       prune: true
