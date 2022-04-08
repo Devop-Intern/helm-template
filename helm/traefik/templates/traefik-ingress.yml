@@ -1,27 +1,26 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Values.ingress.kong_ingress }}
+  name: {{ .Values.ingress.name }}
   annotations:
-    kubernetes.io/ingress.class: "kong"
+    kubernetes.io/ingress.class: "traefik"
 spec:
   rules:
     - host: {{ .Values.ingress.host }}
       http:
         paths:
-          - path: {{ .Values.echoserver.kong_path }}
+          - path: {{ .Values.echoserver.path }}
             pathType: {{ .Values.echoserver.pathType }}
             backend:
               service:
                 name: {{ .Values.echoserver.name }}-svc
                 port: 
                   number: {{ .Values.echoserver.servicePort }}
-
-          - path: {{ .Values.helloworld.kong_path }}
-            pathType: {{ .Values.helloworld.pathType }}
+              
+          - path: {{ .Values.helloserver.path }}
+            pathType: {{ .Values.helloserver.pathType }}
             backend:
               service:
-                name: {{ .Values.helloworld.name }}-svc
+                name: {{ .Values.helloserver.name }}-svc
                 port: 
-                  number: {{ .Values.helloworld.servicePort }}
-                  
+                  number: {{ .Values.helloserver.servicePort }}
