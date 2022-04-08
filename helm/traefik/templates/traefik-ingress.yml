@@ -8,6 +8,7 @@ spec:
   rules:
     - host: {{ .Values.ingress.host }}
       http:
+        paths:
           - path: {{ .Values.echoserver.traefik_path }}
             pathType: {{ .Values.echoserver.pathType }}
             backend:
