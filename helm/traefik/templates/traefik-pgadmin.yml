@@ -23,7 +23,7 @@ spec:
             - name: PGADMIN_DEFAULT_EMAIL
               value: {{ .Values.pgadmin.email }}
             - name: SCRIPT_NAME 
-              value: {{ .Values.pgadmin.traefikscriptname }}
+              value: {{ .Values.pgadmin.scriptname }}
           ports:
             - name: http
               containerPort: 80
